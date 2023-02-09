@@ -1,0 +1,32 @@
+<!-- Copyright (c) Microsoft Corporation and Contributors. -->
+<!-- Licensed under the MIT License. -->
+
+<winX:WindowX
+    x:Class="Demo.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:winX="using:Pyther.WindowX"
+    xmlns:local="using:Demo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    
+    Title="A Pyther.WindowX Example"
+    Width="800"
+    Height="500"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="ToolWindow"
+    >
+
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock>
+            Pyther.WindowX Demo Application :)
+            <LineBreak /><LineBreak />
+            Title="A Pyther.WindowX Example"<LineBreak />
+            Width="800"<LineBreak />
+            Height="500"<LineBreak />
+            WindowStartupLocation="CenterScreen"<LineBreak />
+            WindowStyle="ToolWindow"
+        </TextBlock>
+    </StackPanel>
+</winX:WindowX>
