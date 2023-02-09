@@ -44,3 +44,5 @@ and modify your XAML root tag
 that's it!
 
 This code requires [PInvoke](https://github.com/dotnet/pinvoke) to run.
+
+You will find all the required source in _Pyther.WindowX/WindowX.cs_.
