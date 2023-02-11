@@ -12,6 +12,7 @@ This simple class extends the _Microsoft.UI.Xaml.Window_ class with the followin
  - `WindowState` - the window state (`Normal`, `Minimized` or `Maximized`)
  - `ResizeMode` - the resize modes (`NoResize`, `CanMinimize`, `CanResize` or `CanResizeWithGrip`)
  - `WindowStyle` - the window sytle (`None`, `SingleBorderWindow`, `ThreeDBorderWindow` or `ToolWindow`)
+ - `Icon` - the icon path of an embedded resource ("namespace.path.file")
 
 All properties are made available in the XAML layout files. It will also take DPI scaling into account.
 
