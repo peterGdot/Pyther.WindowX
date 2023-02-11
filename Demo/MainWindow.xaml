@@ -12,7 +12,7 @@
     mc:Ignorable="d"
     
     Title="A Pyther.WindowX Example"
-    Icon="application"
+    Icon="Demo.Assets.window.ico"
     Width="800"
     Height="500"
     WindowStartupLocation="CenterScreen"

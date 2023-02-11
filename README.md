@@ -42,8 +42,24 @@ and modify your XAML root tag
     ...
 </winX:WindowX>
 ```
-
 that's it!
+
+In addition to XAML, you can of course set all properties by code:
+```cs
+    public sealed partial class MainWindow : Pyther.WindowX.WindowX
+    {
+        public MainWindow() {
+            this.InitializeComponent();
+
+            this.Title = "A Pyther.WindowX Example";
+            this.Icon = "Demo.Assets.window.ico";
+            this.Width = 800;
+            this.Height = 500;
+            this.WindowStartupLocation = Pyther.WindowX.WindowStartupLocation.CenterScreen;
+            this.WindowStyle = Pyther.WindowX.WindowStyle.ToolWindow;
+        }
+    }
+```
 
 This code requires [PInvoke](https://github.com/dotnet/pinvoke) to run.
 
