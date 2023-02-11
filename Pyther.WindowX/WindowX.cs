@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using Microsoft.UI;
@@ -267,16 +268,23 @@ namespace Pyther.WindowX
             set {
                 if (value != icon) {
                     try {
-                        if (value == "APP") {
+                        if (value == "application" || value == "app") {
                             string exe = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
                             iconObj = System.Drawing.Icon.ExtractAssociatedIcon(exe);
+                            AppWindow.SetIcon(Win32Interop.GetIconIdFromIcon(iconObj.Handle));
+                        }
+                        else if (value != null && value.StartsWith("abs:")) {
+                            AppWindow.SetIcon(value[4..]);
+                        }
+                        else if (value != null && value.StartsWith("rel:")) {
+                            AppWindow.SetIcon(AppContext.BaseDirectory + value[4..]);
                         }
                         else {
                             Assembly assembly = Assembly.GetEntryAssembly();
                             var res = assembly.GetManifestResourceNames().FirstOrDefault(s => s.Equals(value, StringComparison.InvariantCultureIgnoreCase));
                             iconObj = new Icon(assembly.GetManifestResourceStream(res));
-                        }
-                        AppWindow.SetIcon(Win32Interop.GetIconIdFromIcon(iconObj.Handle));
+                            AppWindow.SetIcon(Win32Interop.GetIconIdFromIcon(iconObj.Handle));
+                        }                        
                         icon = value;
                     } catch (Exception) { }
                 }
