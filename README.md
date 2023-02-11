@@ -5,6 +5,7 @@ Window extension class for Win UI 3 Applications.
 This simple class extends the _Microsoft.UI.Xaml.Window_ class with the following properties you may know from WPF, but are currently missing in Win UI 3:
 
  - `Title` - the window title
+ - `Icon` - the icon path of an **embedded** resource ("namespace.path.file")
  - `Width` - the window width
  - `Height` - the window height
  - `WindowStartupLocation` - the window startup location (`Manual` or `CenterScreen`)
@@ -32,6 +33,7 @@ and modify your XAML root tag
     xmlns:winX="using:Pyther.WindowX"
     ...
     Title="A Pyther.WindowX Example"
+    Icon="Demo.Assets.window.ico"
     Width="800"
     Height="500"
     WindowStartupLocation="CenterScreen"

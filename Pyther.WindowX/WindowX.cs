@@ -1,7 +1,11 @@
 using System;
+using System.Drawing;
+using System.Linq;
+using System.Reflection;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
+using static PInvoke.User32;
 
 namespace Pyther.WindowX
 {
@@ -249,6 +253,29 @@ namespace Pyther.WindowX
             }
         }
 
+        #endregion
+
+        #region Icon Property
+        private Icon iconObj;
+        private string icon;
+
+        public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+            "Icon", typeof(string), typeof(WindowX), null);
+
+        public string Icon {
+            set {
+                if (value != icon) {
+                    try {
+                        Assembly assembly = Assembly.GetEntryAssembly();
+                        var res = assembly.GetManifestResourceNames().FirstOrDefault(s => s.EndsWith(value, StringComparison.InvariantCultureIgnoreCase));
+                        this.iconObj = new Icon(assembly.GetManifestResourceStream(res));
+                        AppWindow.SetIcon(Win32Interop.GetIconIdFromIcon(iconObj.Handle));
+                        icon = value;
+                    } catch (Exception) { }
+                }
+            }
+            get => icon;
+        }
         #endregion
     }
 }

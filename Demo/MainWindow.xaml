@@ -12,6 +12,7 @@
     mc:Ignorable="d"
     
     Title="A Pyther.WindowX Example"
+    Icon="Demo.Assets.window.ico"
     Width="800"
     Height="500"
     WindowStartupLocation="CenterScreen"
@@ -23,6 +24,7 @@
             Pyther.WindowX Demo Application :)
             <LineBreak /><LineBreak />
             Title="A Pyther.WindowX Example"<LineBreak />
+            Icon="Demo.Assets.window.ico"<LineBreak />
             Width="800"<LineBreak />
             Height="500"<LineBreak />
             WindowStartupLocation="CenterScreen"<LineBreak />

@@ -11,6 +11,5 @@ namespace Demo
         public MainWindow() {
             this.InitializeComponent();
         }
-
     }
 }
