@@ -5,7 +5,7 @@ Window extension class for Win UI 3 Applications.
 This simple class extends the _Microsoft.UI.Xaml.Window_ class with the following properties you may know from WPF, but are currently missing in Win UI 3:
 
  - `Title` - the window title
- - `Icon` - the icon path of an *embedded*(!) resource ("namespace.path.file") or the uppercase constant "APP" to use the application icon
+ - `Icon` - the window icon (from a resource, using the application icon or from an external file path)
  - `Width` - the window width
  - `Height` - the window height
  - `WindowStartupLocation` - the window startup location (`Manual` or `CenterScreen`)
@@ -48,3 +48,14 @@ that's it!
 This code requires [PInvoke](https://github.com/dotnet/pinvoke) to run.
 
 You will find all the required source in _Pyther.WindowX/WindowX.cs_.
+
+## Some notes about the *Icon* property
+
+The are 4 ways of using an icon:
+
+1. **embedded resource** - This is the default way to include an icon into your application. You add them as an _embedded(!)_ resource and access it using the resource resolve syntax `"namespace.path.file"` like `Icon="Demo.Assets.window.ico"`.
+2. **using the application icon** - If you has set an application icon, you can simply (re)use it with `Icon="application"` or `Icon="app"`.
+3. **using relative file path** - To load an icon from an external file relative to your application directory, you can use the `rel:` prefix like `Icon="rel:media\window.ico"`.
+4. **using absolute file path** - And finally you can also load from an external absolute file path using the `abs:` prefix like `Icon="abs:E:\Projects\Pyther\WindowX\window.ico"`.
+
+It's also worth to mention, that no _Exception_ will be thrown, if setting an icon failed.
