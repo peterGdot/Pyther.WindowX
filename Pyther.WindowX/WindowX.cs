@@ -273,7 +273,7 @@ namespace Pyther.WindowX
                         }
                         else {
                             Assembly assembly = Assembly.GetEntryAssembly();
-                            var res = assembly.GetManifestResourceNames().FirstOrDefault(s => s.EndsWith(value, StringComparison.InvariantCultureIgnoreCase));
+                            var res = assembly.GetManifestResourceNames().FirstOrDefault(s => s.Equals(value, StringComparison.InvariantCultureIgnoreCase));
                             iconObj = new Icon(assembly.GetManifestResourceStream(res));
                         }
                         AppWindow.SetIcon(Win32Interop.GetIconIdFromIcon(iconObj.Handle));
