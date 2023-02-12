@@ -1,13 +1,10 @@
 using System;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
-using PInvoke;
-using static PInvoke.User32;
 
 namespace Pyther.WindowX
 {
@@ -43,6 +40,21 @@ namespace Pyther.WindowX
 
     public class WindowX : Microsoft.UI.Xaml.Window
     {
+        bool firstActivated = false;
+
+        public WindowX() : base(){
+            Activated += WindowX_FirstActivated;
+        }
+
+        private void WindowX_FirstActivated(object sender, WindowActivatedEventArgs args) {
+            firstActivated = true;
+            if (requestWindowState.HasValue) {
+                WindowState = requestWindowState.GetValueOrDefault();
+                requestWindowState = null;
+            }
+            Activated -= WindowX_FirstActivated;
+        }
+
         #region Handles
 
         private IntPtr handle = IntPtr.Zero;
@@ -165,6 +177,7 @@ namespace Pyther.WindowX
         #endregion
 
         #region WindowState Property
+        private Nullable<WindowState> requestWindowState = null;
 
         public static readonly DependencyProperty WindowStateProperty = DependencyProperty.Register(
             "WindowState", typeof(WindowState), typeof(WindowX), null);
@@ -175,22 +188,35 @@ namespace Pyther.WindowX
                 return windowState;
             }
             set {
-                windowState = value;
                 try {
                     switch (value) {
                         case WindowState.Maximized:
-                            PInvoke.User32.ShowWindow(Handle, PInvoke.User32.WindowShowStyle.SW_MAXIMIZE);
+                            // window can crash if called before the window was visible/activated. So deffer it
+                            if (this.firstActivated) {
+                                ((OverlappedPresenter)AppWindow.Presenter).Maximize();
+                            } else {
+                                requestWindowState = value;
+                            }
                             break;
                         case WindowState.Minimized:
-                            PInvoke.User32.ShowWindow(Handle, PInvoke.User32.WindowShowStyle.SW_MINIMIZE);
+                            if (!this.firstActivated) {
+                                requestWindowState = value;
+                            }
+                            // avoid popping
+                            ((OverlappedPresenter)AppWindow.Presenter).Minimize();
                             break;
-                            // case WindowState.Normal:
-                            //    PInvoke.User32.ShowWindow(Handle, PInvoke.User32.WindowShowStyle.SW_RESTORE);
-                            //    break;
+                        case WindowState.Normal:
+                            // window can crash if called before the window was visible/activated. So deffer it
+                            if (this.firstActivated) {
+                                ((OverlappedPresenter)AppWindow.Presenter).Restore();
+                            }
+                            else {
+                                requestWindowState = value;
+                            }
+                            break;
                     }
-                } catch {
-
-                }
+                    windowState = value;
+                } catch { }
             }
         }
 
@@ -292,5 +318,6 @@ namespace Pyther.WindowX
             get => icon;
         }
         #endregion
+
     }
 }
