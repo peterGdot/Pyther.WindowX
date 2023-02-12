@@ -63,7 +63,7 @@ In addition to XAML, you can of course set all properties by code:
 
 This code requires [PInvoke](https://github.com/dotnet/pinvoke) and [System.Drawing.Common](https://www.nuget.org/packages/System.Drawing.Common) (if you want to use the `Icon` property) to run. 
 
-You will find all the required source in _Pyther.WindowX/WindowX.cs_.
+You will find all the required source in [_Pyther.WindowX/WindowX.cs_](https://github.com/peterGdot/Pyther.WindowX/blob/master/Pyther.WindowX/WindowX.cs).
 
 ## Some notes about the *Icon* property
 
